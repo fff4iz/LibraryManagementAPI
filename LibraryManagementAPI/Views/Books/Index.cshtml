@@ -1,0 +1,52 @@
+﻿@model IEnumerable<LibraryManagementAPI.Models.Book>
+
+<h2>Books List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Book ID</th>
+            <th>Book Name</th>
+            <th>Author</th>
+            <th>Publisher</th>
+            <th>Status</th>
+            <th>Borrower Name</th>
+            <th style="text-align: center;">Action</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model)
+        {
+            <tr>
+                <td>@book.BookID</td>
+                <td>@book.Title</td>
+                <td>@book.Author</td>
+                <td>@book.Publisher</td>
+                <td><strong>
+                        @if (book.Status == "AVAILABLE")
+                        {
+                            <strong style="color: green;">@book.Status</strong>
+                        }
+                        else if (book.Status == "BORROWED")
+                        {
+                            <strong style="color: red;">@book.Status</strong>
+                        }
+                        else
+                        {
+                            <strong>@book.Status</strong>
+                        }
+                </strong></td>
+                <th>@book.BorrowerName</th>
+                <td style="text-align: center;">
+                    <a asp-action="Edit" asp-route-id="@book.BookID" class="btn btn-primary">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@book.BookID" class="btn btn-danger">Delete</a> |
+                    <a asp-action="Borrow" asp-route-id="@book.BookID" class="btn btn-success">Borrow</a> |
+                    <a asp-action="Return" asp-route-id="@book.BookID" class="btn btn-success">Return</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Create" class="btn btn-primary">Add New Book</a>

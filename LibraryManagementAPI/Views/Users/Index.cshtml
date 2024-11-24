@@ -1,0 +1,31 @@
+﻿@model IEnumerable<LibraryManagementAPI.Models.User>
+
+<h2>Users List</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>User ID</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th style="text-align: center;">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.UID</td>
+                <td>@user.FullName</td>
+                <td>@user.Email</td>
+                <td>@user.PhoneNumber</td>
+                <td style="text-align: center;">
+                    <a asp-action="Edit" asp-route-id="@user.UID" class="btn btn-primary">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@user.UID" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Create" class="btn btn-primary">Add New User</a>
